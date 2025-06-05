@@ -1,3 +1,5 @@
+"use client"
+
 import { ReactNode } from 'react'
 import { clsx } from 'clsx'
 import { TrendingUp, TrendingDown } from 'lucide-react'
@@ -13,29 +15,43 @@ interface StatCardProps {
   }
 }
 
-export function StatCard({ 
-  title, 
-  value, 
-  icon, 
+export function StatCard({
+  title,
+  value,
+  icon,
   variant = 'default',
-  trend 
+  trend,
 }: StatCardProps) {
+  const variantStyles = {
+    default: '',
+    success: 'bg-success/10 text-success',
+    warning: 'bg-warning/10 text-warning',
+    error: 'bg-error/10 text-error',
+  }
+
   return (
-    <div style={{ 
-      backgroundColor: 'white', 
-      border: '2px solid red', 
-      padding: '20px',
-      borderRadius: '8px'
-    }}>
-      <h3 style={{ color: 'black', fontSize: '20px', marginBottom: '10px' }}>
-        {title || 'NO TITLE'}
-      </h3>
-      <p style={{ color: 'black', fontSize: '36px', fontWeight: 'bold' }}>
-        {value || 'NO VALUE'}
-      </p>
-      <div style={{ color: 'red' }}>
-        VARIANT: {variant}
+    <div
+      className={clsx(
+        'rounded-lg border border-border p-6 space-y-2',
+        variantStyles[variant]
+      )}
+    >
+      <div className="flex items-center justify-between">
+        <span className="text-sm font-medium">{title || 'NO TITLE'}</span>
+        <div className="w-6 h-6 text-inherit">{icon}</div>
       </div>
+      <p className="text-3xl font-semibold">{value || 'NO VALUE'}</p>
+      {trend && (
+        <div className="flex items-center text-sm text-foreground-secondary">
+          {trend.value >= 0 ? (
+            <TrendingUp className="h-4 w-4 mr-1" />
+          ) : (
+            <TrendingDown className="h-4 w-4 mr-1" />
+          )}
+          <span>{trend.value}%</span>
+          <span className="ml-1">{trend.label}</span>
+        </div>
+      )}
     </div>
   )
 }
