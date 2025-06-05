@@ -58,12 +58,12 @@ export function DashboardStats({ userId }: DashboardStatsProps) {
     return (
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
         {[1, 2, 3, 4].map((i) => (
-          <div key={i} className="bg-white rounded-lg p-6 h-40 shadow-sm animate-pulse">
-            <div className="flex items-start justify-between mb-8">
+          <div key={i} className="bg-white rounded-lg p-4 sm:p-6 min-h-[140px] shadow-sm animate-pulse">
+            <div className="flex items-start justify-between mb-4 sm:mb-8">
               <div className="h-4 w-32 bg-neutral-medium/10 rounded" />
-              <div className="h-8 w-8 bg-neutral-medium/10 rounded" />
+              <div className="h-6 w-6 sm:h-8 sm:w-8 bg-neutral-medium/10 rounded" />
             </div>
-            <div className="h-10 w-20 bg-neutral-medium/10 rounded" />
+            <div className="h-8 sm:h-10 w-20 bg-neutral-medium/10 rounded" />
           </div>
         ))}
       </div>
@@ -103,15 +103,15 @@ export function DashboardStats({ userId }: DashboardStatsProps) {
       {statCards.map((stat, index) => {
         const Icon = stat.icon
         return (
-          <div key={index} className="bg-white rounded-lg p-6 h-40 shadow-sm">
-            <div className="flex items-start justify-between mb-8">
+          <div key={index} className="bg-white rounded-lg p-4 sm:p-6 min-h-[140px] shadow-sm">
+            <div className="flex items-start justify-between mb-4 sm:mb-8">
               <h3 className="text-xs font-medium tracking-wider text-neutral-medium uppercase">
                 {stat.title}
               </h3>
-              <Icon className={`h-8 w-8 ${stat.iconColor}`} />
+              <Icon className={`h-6 w-6 sm:h-8 sm:w-8 ${stat.iconColor}`} />
             </div>
             <div>
-              <div className="text-4xl font-bold text-primary">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary">
                 {stat.value}
               </div>
               {stat.subtitle && (

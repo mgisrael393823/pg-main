@@ -16,6 +16,7 @@ import {
 import { clsx } from 'clsx'
 import { createClientSupabase } from '@/utils/supabase-client'
 import { useToast } from '@/components/providers/toast-provider'
+import { useSidebar } from '@/components/providers/sidebar-provider'
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: Home },
@@ -32,6 +33,15 @@ export function DashboardNav() {
   const router = useRouter()
   const { addToast } = useToast()
   const supabase = createClientSupabase()
+  
+  // Try to use sidebar context, but don't fail if not available
+  let closeSidebar: () => void = () => {}
+  try {
+    const sidebar = useSidebar()
+    closeSidebar = sidebar.close
+  } catch {
+    // Not in sidebar context, that's ok
+  }
 
   const handleSignOut = async () => {
     const { error } = await supabase.auth.signOut()
@@ -68,8 +78,9 @@ export function DashboardNav() {
               <li key={item.href}>
                 <Link
                   href={item.href}
+                  onClick={closeSidebar}
                   className={clsx(
-                    'flex items-center gap-3 px-3 py-2.5 rounded-md transition-all duration-150 text-sm',
+                    'flex items-center gap-3 px-3 py-3 sm:py-2.5 rounded-md transition-all duration-150 text-sm min-h-[44px] sm:min-h-0',
                     isActive
                       ? 'bg-accent-primary text-secondary font-medium'
                       : 'text-secondary/70 hover:bg-accent-primary/10 hover:text-secondary'
@@ -99,10 +110,10 @@ export function DashboardNav() {
             </div>
             <button
               onClick={handleSignOut}
-              className="p-2 text-secondary/50 hover:text-secondary hover:bg-accent-primary/20 rounded-md transition-colors"
+              className="p-3 sm:p-2 text-secondary/50 hover:text-secondary hover:bg-accent-primary/20 rounded-md transition-colors min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 flex items-center justify-center"
               aria-label="Sign out"
             >
-              <LogOut className="h-4 w-4" />
+              <LogOut className="h-5 w-5 sm:h-4 sm:w-4" />
             </button>
           </div>
         </div>

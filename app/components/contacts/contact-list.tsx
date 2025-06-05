@@ -94,17 +94,17 @@ export function ContactList({ initialContacts = [] }: ContactListProps) {
   return (
     <div className="space-y-4">
       {/* Search and Filters */}
-      <div className="flex gap-4">
+      <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground-muted" />
           <Input
-            placeholder="Search by name, email, or company..."
+            placeholder="Search contacts..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10"
           />
         </div>
-        <Button variant="outline">
+        <Button variant="outline" className="w-full sm:w-auto">
           <Filter className="h-4 w-4 mr-2" />
           Filters
         </Button>
@@ -137,10 +137,10 @@ export function ContactList({ initialContacts = [] }: ContactListProps) {
               {data?.contacts.map((contact) => (
                 <Card key={contact.id} className="hover:shadow-md transition-shadow cursor-pointer">
                   <CardContent className="p-4">
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-1 flex-1">
-                        <div className="flex items-center gap-3">
-                          <h3 className="font-medium text-foreground">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                      <div className="space-y-2 flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h3 className="font-medium text-foreground truncate">
                             {contact.first_name || contact.last_name
                               ? `${contact.first_name || ''} ${contact.last_name || ''}`.trim()
                               : 'Unnamed Contact'}
@@ -157,11 +157,11 @@ export function ContactList({ initialContacts = [] }: ContactListProps) {
                           )}
                         </div>
                         
-                        <div className="flex flex-wrap gap-4 text-sm text-foreground-secondary">
+                        <div className="flex flex-wrap gap-3 sm:gap-4 text-sm text-foreground-secondary">
                           {contact.email && (
-                            <div className="flex items-center gap-1">
-                              <Mail className="h-3 w-3" />
-                              <span>{contact.email}</span>
+                            <div className="flex items-center gap-1 min-w-0">
+                              <Mail className="h-3 w-3 flex-shrink-0" />
+                              <span className="truncate">{contact.email}</span>
                             </div>
                           )}
                           {contact.phone && (
@@ -204,9 +204,9 @@ export function ContactList({ initialContacts = [] }: ContactListProps) {
 
           {/* Pagination */}
           {data && data.totalPages > 1 && (
-            <div className="flex items-center justify-between">
-              <p className="text-sm text-foreground-secondary">
-                Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, data.totalCount)} of {data.totalCount} contacts
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p className="text-sm text-foreground-secondary text-center sm:text-left">
+                Showing {((currentPage - 1) * pageSize) + 1}-{Math.min(currentPage * pageSize, data.totalCount)} of {data.totalCount}
               </p>
               <div className="flex gap-2">
                 <Button
@@ -214,18 +214,22 @@ export function ContactList({ initialContacts = [] }: ContactListProps) {
                   size="sm"
                   onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                   disabled={currentPage === 1}
+                  className="flex-1 sm:flex-initial"
                 >
-                  <ChevronLeft className="h-4 w-4" />
-                  Previous
+                  <ChevronLeft className="h-4 w-4 mr-1 sm:mr-0" />
+                  <span className="sm:hidden">Prev</span>
+                  <span className="hidden sm:inline">Previous</span>
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setCurrentPage(prev => Math.min(data.totalPages, prev + 1))}
                   disabled={currentPage === data.totalPages}
+                  className="flex-1 sm:flex-initial"
                 >
-                  Next
-                  <ChevronRight className="h-4 w-4" />
+                  <span className="sm:hidden">Next</span>
+                  <span className="hidden sm:inline">Next</span>
+                  <ChevronRight className="h-4 w-4 ml-1 sm:ml-0" />
                 </Button>
               </div>
             </div>
