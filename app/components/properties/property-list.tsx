@@ -82,17 +82,17 @@ export function PropertyList({ initialProperties = [] }: PropertyListProps) {
   return (
     <div className="space-y-4">
       {/* Search and Filters */}
-      <div className="flex gap-4">
+      <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground-muted" />
           <Input
-            placeholder="Search by address, city, or owner name..."
+            placeholder="Search properties..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10"
           />
         </div>
-        <Button variant="outline">
+        <Button variant="outline" className="w-full sm:w-auto">
           <Filter className="h-4 w-4 mr-2" />
           Filters
         </Button>
@@ -127,21 +127,21 @@ export function PropertyList({ initialProperties = [] }: PropertyListProps) {
                   <CardContent className="p-4">
                     <div className="flex items-start justify-between">
                       <div className="space-y-2 flex-1">
-                        <div className="flex items-start justify-between">
-                          <div>
-                            <h3 className="font-medium text-foreground">
+                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                          <div className="min-w-0">
+                            <h3 className="font-medium text-foreground truncate">
                               {property.address}
                             </h3>
                             <p className="text-sm text-foreground-secondary">
                               {formatAddress(null, property.city, property.state, property.zip_code)}
                             </p>
                           </div>
-                          <Badge variant={getPropertyTypeColor(property.property_type)} size="sm">
+                          <Badge variant={getPropertyTypeColor(property.property_type)} size="sm" className="self-start">
                             {property.property_type}
                           </Badge>
                         </div>
                         
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 text-sm">
                           <div>
                             <p className="text-foreground-muted">Est. Value</p>
                             <p className="font-medium text-foreground">
@@ -198,9 +198,9 @@ export function PropertyList({ initialProperties = [] }: PropertyListProps) {
 
           {/* Pagination */}
           {data && data.totalPages > 1 && (
-            <div className="flex items-center justify-between">
-              <p className="text-sm text-foreground-secondary">
-                Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, data.totalCount)} of {data.totalCount} properties
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p className="text-sm text-foreground-secondary text-center sm:text-left">
+                Showing {((currentPage - 1) * pageSize) + 1}-{Math.min(currentPage * pageSize, data.totalCount)} of {data.totalCount}
               </p>
               <div className="flex gap-2">
                 <Button
@@ -208,18 +208,22 @@ export function PropertyList({ initialProperties = [] }: PropertyListProps) {
                   size="sm"
                   onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                   disabled={currentPage === 1}
+                  className="flex-1 sm:flex-initial"
                 >
-                  <ChevronLeft className="h-4 w-4" />
-                  Previous
+                  <ChevronLeft className="h-4 w-4 mr-1 sm:mr-0" />
+                  <span className="sm:hidden">Prev</span>
+                  <span className="hidden sm:inline">Previous</span>
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setCurrentPage(prev => Math.min(data.totalPages, prev + 1))}
                   disabled={currentPage === data.totalPages}
+                  className="flex-1 sm:flex-initial"
                 >
-                  Next
-                  <ChevronRight className="h-4 w-4" />
+                  <span className="sm:hidden">Next</span>
+                  <span className="hidden sm:inline">Next</span>
+                  <ChevronRight className="h-4 w-4 ml-1 sm:ml-0" />
                 </Button>
               </div>
             </div>
