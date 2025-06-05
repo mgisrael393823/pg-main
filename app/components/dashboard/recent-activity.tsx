@@ -52,7 +52,7 @@ export function RecentActivity() {
         <div className="space-y-3">
           {activities.length === 0 ? (
             <div className="min-h-[200px] flex items-center justify-center p-4">
-              <p className="text-gray-500 text-center">
+              <p className="text-neutral-medium text-center">
                 No recent activity to display
               </p>
             </div>
@@ -62,24 +62,24 @@ export function RecentActivity() {
               return (
                 <div
                   key={activity.id}
-                  className="flex items-start gap-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
+                  className="flex items-start gap-4 p-4 rounded-lg bg-accent-tertiary/10 hover:bg-accent-tertiary/20 transition-colors"
                 >
-                  <div className="p-2.5 rounded-lg bg-white flex items-center justify-center border border-gray-200">
-                    <Icon className="h-5 w-5 text-gray-600" />
+                  <div className="p-2.5 rounded-lg bg-white flex items-center justify-center border border-accent-tertiary/20">
+                    <Icon className="h-5 w-5 text-primary" />
                   </div>
                   <div className="flex-1 space-y-1">
                     <div className="flex items-center justify-between">
-                      <p className="font-semibold text-gray-900 text-sm">
+                      <p className="font-semibold text-primary text-sm">
                         {activity.title}
                       </p>
                       <Badge variant={activityColors[activity.type]} size="sm">
                         {activity.type}
                       </Badge>
                     </div>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-neutral-medium">
                       {activity.description}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-neutral-medium/70">
                       {formatRelativeTime(activity.timestamp)}
                     </p>
                   </div>

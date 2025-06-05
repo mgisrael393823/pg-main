@@ -18,7 +18,7 @@ export default async function DashboardPage() {
   } = await supabase.auth.getUser()
 
   return (
-    <div className="h-full">
+    <div className="h-full p-8">
       <PageHeader
         title="Dashboard"
         description="Welcome back! Here's an overview of your real estate prospecting activity."
@@ -35,7 +35,7 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="min-h-[150px] flex items-center justify-center p-4">
-              <p className="text-gray-500 text-center">
+              <p className="text-neutral-medium text-center">
                 No contacts synced yet. Connect your HubSpot account to get started.
               </p>
             </div>
@@ -48,7 +48,7 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="min-h-[150px] flex items-center justify-center p-4">
-              <p className="text-gray-500 text-center">
+              <p className="text-neutral-medium text-center">
                 No properties imported yet. Upload a PropStream CSV to begin.
               </p>
             </div>

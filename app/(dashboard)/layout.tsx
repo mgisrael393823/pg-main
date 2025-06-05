@@ -18,23 +18,20 @@ export default async function DashboardLayout({
   //   redirect('/login')
   // }
 
-  // Get user profile if needed in the future
-  // const { data: userProfile } = await supabase
-  //   .from('users')
-  //   .select('*')
-  //   .eq('id', session.user.id)
-  //   .single()
-
   return (
-    <div className="min-h-screen bg-gray-50 flex">
-      {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-gray-200 shadow-sm">
-        <DashboardNav />
-      </aside>
+    <div className="h-screen flex overflow-hidden bg-secondary">
+      {/* Sidebar - Fixed width and height */}
+      <div className="w-64 bg-primary flex-shrink-0">
+        <div className="h-full flex flex-col">
+          <DashboardNav />
+        </div>
+      </div>
       
-      {/* Main content */}
-      <main className="flex-1 px-8 py-8">
-        {children}
+      {/* Main content - Scrollable */}
+      <main className="flex-1 overflow-y-auto">
+        <div className="h-full">
+          {children}
+        </div>
       </main>
     </div>
   )

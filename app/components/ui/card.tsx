@@ -18,7 +18,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={clsx(
-          'bg-white rounded-lg shadow-sm border border-gray-200',
+          'card',
           paddingClasses[padding],
           className
         )}
@@ -48,7 +48,7 @@ export const CardTitle = forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTM
   ({ className, ...props }, ref) => (
     <h3
       ref={ref}
-      className={clsx('text-lg font-semibold text-gray-900', className)}
+      className={clsx('text-lg font-semibold text-primary', className)}
       {...props}
     />
   )
@@ -60,7 +60,7 @@ export const CardDescription = forwardRef<HTMLParagraphElement, React.HTMLAttrib
   ({ className, ...props }, ref) => (
     <p
       ref={ref}
-      className={clsx('text-sm text-gray-600', className)}
+      className={clsx('text-sm text-neutral-medium', className)}
       {...props}
     />
   )

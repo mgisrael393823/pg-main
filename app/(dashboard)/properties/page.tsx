@@ -23,7 +23,7 @@ export default async function PropertiesPage() {
   const hasProperties = (count || 0) > 0
 
   return (
-    <div className="h-full">
+    <div className="h-full p-8">
       <PageHeader
         title="Properties"
         description="Manage off-market properties from PropStream"
@@ -39,11 +39,11 @@ export default async function PropertiesPage() {
           </CardHeader>
           <CardContent>
             <div className="text-center py-12">
-              <Building2 className="h-12 w-12 text-foreground-muted mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-foreground mb-2">
+              <Building2 className="h-12 w-12 text-neutral-medium mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-primary mb-2">
                 Import Property Data
               </h3>
-              <p className="text-foreground-secondary mb-6 max-w-md mx-auto">
+              <p className="text-neutral-medium mb-6 max-w-md mx-auto">
                 Upload your PropStream CSV file to import off-market properties
                 and start matching them with your contacts.
               </p>

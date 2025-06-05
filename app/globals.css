@@ -1,3 +1,68 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary Colors */
+    --primary: #151515; /* Matt Black */
+    --secondary: #EFEEE9; /* White Mink */
+    
+    /* Accent Colors */
+    --accent-primary: #324038; /* Roycroft Bottle Green */
+    --accent-secondary: #E8B793; /* Gentle Doe */
+    --accent-tertiary: #F0DCCB; /* Champagne Pink */
+    --neutral-medium: #795953; /* Sequoia Dusk */
+    
+    /* Functional Colors */
+    --error: #D32F2F;
+    --warning: #F57C00;
+    --success: #324038; /* Roycroft Bottle Green */
+    
+    /* Semantic Colors for shadcn/ui compatibility */
+    --foreground: #151515; /* Matt Black */
+    --muted-foreground: #795953; /* Sequoia Dusk */
+    --card: #FFFFFF;
+    --card-foreground: #151515;
+  }
+
+  body {
+    @apply bg-secondary text-primary;
+  }
+
+  /* Typography Scale */
+  h1 {
+    @apply text-[32px] leading-tight font-semibold;
+  }
+  
+  h2 {
+    @apply text-[24px] leading-tight font-semibold;
+  }
+  
+  h3 {
+    @apply text-[20px] leading-tight font-medium;
+  }
+  
+  p, body {
+    @apply text-[16px] leading-relaxed;
+  }
+  
+  small {
+    @apply text-[14px] leading-normal;
+  }
+}
+
+@layer components {
+  /* Custom component styles that use the design system */
+  .btn-primary {
+    @apply bg-accent-primary text-secondary hover:bg-accent-primary/90 transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-accent-secondary text-primary hover:bg-accent-secondary/90 transition-colors;
+  }
+  
+  .card {
+    @apply bg-white shadow-sm border border-accent-tertiary/20 rounded-lg;
+  }
+}

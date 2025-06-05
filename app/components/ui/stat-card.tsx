@@ -21,20 +21,20 @@ export function StatCard({
   trend 
 }: StatCardProps) {
   const iconColors = {
-    default: 'bg-gray-100 text-gray-600',
-    success: 'bg-green-100 text-green-600',
-    warning: 'bg-yellow-100 text-yellow-600',
-    error: 'bg-red-100 text-red-600',
+    default: 'bg-accent-tertiary/20 text-primary',
+    success: 'bg-success/10 text-success',
+    warning: 'bg-warning/10 text-warning',
+    error: 'bg-error/10 text-error',
   }
 
-  const trendColor = trend?.value && trend.value > 0 ? 'text-green-600' : 'text-red-600'
+  const trendColor = trend?.value && trend.value > 0 ? 'text-success' : 'text-error'
 
   return (
-    <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-200">
+    <div className="card hover:shadow-md transition-all duration-200">
       <div className="flex flex-col">
         {/* Row 1: Label and Icon */}
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-sm font-medium text-gray-600 uppercase tracking-wider">
+          <h3 className="text-sm font-medium text-neutral-medium uppercase tracking-wider">
             {title}
           </h3>
           <div className={clsx(
@@ -47,7 +47,7 @@ export function StatCard({
         
         {/* Row 2: Value */}
         <div className="mb-2">
-          <p className="text-3xl font-bold text-gray-900">
+          <p className="text-3xl font-bold text-primary">
             {value}
           </p>
         </div>
@@ -63,7 +63,7 @@ export function StatCard({
             <span className={clsx('text-sm font-medium', trendColor)}>
               {Math.abs(trend.value)}%
             </span>
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-neutral-medium">
               {trend.label}
             </span>
           </div>

@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { BarChart3, TrendingUp, Users, Building2 } from 'lucide-react'
+import { BarChart3, TrendingUp, Users, Building2, Clock } from 'lucide-react'
 import { PageHeader } from '@/components/layout/page-header'
 
 export const metadata: Metadata = {
@@ -9,98 +9,79 @@ export const metadata: Metadata = {
 }
 
 export default function AnalyticsPage() {
+  // Using the same stat card structure as dashboard
+  const statCards = [
+    {
+      title: 'CONVERSION RATE',
+      value: '0%',
+      icon: TrendingUp,
+      iconColor: 'text-success',
+    },
+    {
+      title: 'ACTIVE LEADS',
+      value: '0',
+      icon: Users,
+      iconColor: 'text-primary',
+    },
+    {
+      title: 'PROPERTIES MATCHED',
+      value: '0',
+      icon: Building2,
+      iconColor: 'text-primary',
+    },
+    {
+      title: 'TIME SAVED',
+      value: '0 hrs',
+      icon: Clock,
+      iconColor: 'text-warning',
+    },
+  ]
+
   return (
-    <div className="h-full">
+    <div className="h-full p-8">
       <PageHeader
         title="Analytics"
         description="Track your prospecting performance and ROI"
       />
 
       <div className="space-y-6">
-
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-foreground-secondary">
-                  Conversion Rate
-                </p>
-                <p className="text-2xl font-bold text-foreground mt-1">
-                  0%
-                </p>
+        {/* Stats Grid - Same structure as dashboard */}
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+          {statCards.map((stat, index) => {
+            const Icon = stat.icon
+            return (
+              <div key={index} className="bg-white rounded-lg p-6 h-40 shadow-sm">
+                <div className="flex items-start justify-between mb-8">
+                  <h3 className="text-xs font-medium tracking-wider text-neutral-medium uppercase">
+                    {stat.title}
+                  </h3>
+                  <Icon className={`h-8 w-8 ${stat.iconColor}`} />
+                </div>
+                <div className="text-4xl font-bold text-primary">
+                  {stat.value}
+                </div>
               </div>
-              <TrendingUp className="h-8 w-8 text-success" />
+            )
+          })}
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Performance Overview</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-center py-12">
+              <BarChart3 className="h-12 w-12 text-neutral-medium mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-primary mb-2">
+                No Data Available Yet
+              </h3>
+              <p className="text-neutral-medium max-w-md mx-auto">
+                Start importing contacts and properties to see your analytics
+                and track your prospecting performance.
+              </p>
             </div>
           </CardContent>
         </Card>
-
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-foreground-secondary">
-                  Active Leads
-                </p>
-                <p className="text-2xl font-bold text-foreground mt-1">
-                  0
-                </p>
-              </div>
-              <Users className="h-8 w-8 text-accent-primary" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-foreground-secondary">
-                  Properties Matched
-                </p>
-                <p className="text-2xl font-bold text-foreground mt-1">
-                  0
-                </p>
-              </div>
-              <Building2 className="h-8 w-8 text-accent-secondary" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-foreground-secondary">
-                  Time Saved
-                </p>
-                <p className="text-2xl font-bold text-foreground mt-1">
-                  0 hrs
-                </p>
-              </div>
-              <BarChart3 className="h-8 w-8 text-warning" />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Performance Overview</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center py-12">
-            <BarChart3 className="h-12 w-12 text-foreground-muted mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-foreground mb-2">
-              No Data Available Yet
-            </h3>
-            <p className="text-foreground-secondary max-w-md mx-auto">
-              Start importing contacts and properties to see your analytics
-              and track your prospecting performance.
-            </p>
-          </div>
-        </CardContent>
-      </Card>
       </div>
     </div>
   )

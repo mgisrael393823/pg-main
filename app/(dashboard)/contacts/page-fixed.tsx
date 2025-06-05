@@ -1,3 +1,4 @@
+// Fixed page structure for all pages
 import { Metadata } from 'next'
 import { createServerSupabase } from '@/utils/supabase-server'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -15,7 +16,6 @@ export const metadata: Metadata = {
 export default async function ContactsPage() {
   const supabase = createServerSupabase()
   
-  // Check if user has HubSpot connected
   const { data: { user } } = await supabase.auth.getUser()
   const { data: integration } = await supabase
     .from('integrations')
@@ -26,6 +26,7 @@ export default async function ContactsPage() {
     .single()
 
   const hasHubSpotConnected = !!integration
+
   return (
     <div className="h-full p-8">
       <PageHeader
@@ -35,29 +36,28 @@ export default async function ContactsPage() {
       />
 
       <div className="space-y-6">
-
-      {!hasHubSpotConnected ? (
-        <Card>
-          <CardHeader>
-            <CardTitle>HubSpot Integration</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-center py-12">
-              <Users className="h-12 w-12 text-neutral-medium mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-primary mb-2">
-                Connect HubSpot to Get Started
-              </h3>
-              <p className="text-neutral-medium mb-6 max-w-md mx-auto">
-                Sync your contacts from HubSpot to start matching them with properties
-                and creating intelligent alerts.
-              </p>
-              <ConnectHubSpotButton />
-            </div>
-          </CardContent>
-        </Card>
-      ) : (
-        <ContactList />
-      )}
+        {!hasHubSpotConnected ? (
+          <Card>
+            <CardHeader>
+              <CardTitle>HubSpot Integration</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center py-12">
+                <Users className="h-12 w-12 text-neutral-medium mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-primary mb-2">
+                  Connect HubSpot to Get Started
+                </h3>
+                <p className="text-neutral-medium mb-6 max-w-md mx-auto">
+                  Sync your contacts from HubSpot to start matching them with properties
+                  and creating intelligent alerts.
+                </p>
+                <ConnectHubSpotButton />
+              </div>
+            </CardContent>
+          </Card>
+        ) : (
+          <ContactList />
+        )}
       </div>
     </div>
   )

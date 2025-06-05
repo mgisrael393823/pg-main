@@ -48,18 +48,18 @@ export function DashboardNav() {
   }
 
   return (
-    <div className="flex flex-col h-full">
-      {/* Header */}
-      <div className="h-20 flex items-center px-6 border-b border-gray-200">
+    <div className="h-full flex flex-col">
+      {/* Logo/Brand */}
+      <div className="h-16 flex items-center px-6 flex-shrink-0">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">PorterGoldberg</h2>
-          <p className="text-xs text-gray-500 uppercase tracking-wider">Dashboard</p>
+          <h2 className="text-xl font-semibold text-secondary">PorterGoldberg</h2>
+          <p className="text-xs text-accent-secondary uppercase tracking-wider">Real Estate Platform</p>
         </div>
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 px-4 pt-6">
-          <ul className="space-y-1">
+      {/* Navigation - Scrollable if needed */}
+      <nav className="flex-1 overflow-y-auto px-3 py-4">
+        <ul className="space-y-1">
           {navItems.map((item) => {
             const isActive = pathname === item.href
             const Icon = item.icon
@@ -67,12 +67,12 @@ export function DashboardNav() {
             return (
               <li key={item.href}>
                 <Link
-                  href={item.href as any}
+                  href={item.href}
                   className={clsx(
-                    'flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 font-medium text-sm',
+                    'flex items-center gap-3 px-3 py-2.5 rounded-md transition-all duration-150 text-sm',
                     isActive
-                      ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-600 pl-2'
-                      : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                      ? 'bg-accent-primary text-secondary font-medium'
+                      : 'text-secondary/70 hover:bg-accent-primary/10 hover:text-secondary'
                   )}
                 >
                   <Icon className="h-5 w-5 flex-shrink-0" />
@@ -81,27 +81,32 @@ export function DashboardNav() {
               </li>
             )
           })}
-          </ul>
-        </nav>
+        </ul>
+      </nav>
 
-        {/* User section at bottom */}
-        <div className="mt-auto p-4 border-t border-gray-200">
+      {/* User section - Fixed at bottom */}
+      <div className="flex-shrink-0 border-t border-accent-primary/20">
+        <div className="p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
-                <User className="h-4 w-4 text-gray-600" />
+              <div className="h-9 w-9 rounded-full bg-accent-primary flex items-center justify-center">
+                <User className="h-5 w-5 text-secondary" />
               </div>
-              <span className="text-sm font-medium text-gray-700">User</span>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-secondary truncate">User</p>
+                <p className="text-xs text-secondary/60 truncate">user@example.com</p>
+              </div>
             </div>
             <button
               onClick={handleSignOut}
-              className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-2 text-secondary/50 hover:text-secondary hover:bg-accent-primary/20 rounded-md transition-colors"
               aria-label="Sign out"
             >
               <LogOut className="h-4 w-4" />
             </button>
           </div>
         </div>
+      </div>
     </div>
   )
 }

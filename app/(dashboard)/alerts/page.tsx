@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function AlertsPage() {
   return (
-    <div className="h-full">
+    <div className="h-full p-8">
       <PageHeader
         title="Alerts"
         description="Configure intelligent alerts for property matches"
@@ -37,11 +37,11 @@ export default function AlertsPage() {
         </CardHeader>
         <CardContent>
           <div className="text-center py-12">
-            <Bell className="h-12 w-12 text-foreground-muted mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-foreground mb-2">
+            <Bell className="h-12 w-12 text-neutral-medium mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-primary mb-2">
               No Alert Rules Yet
             </h3>
-            <p className="text-foreground-secondary mb-6 max-w-md mx-auto">
+            <p className="text-neutral-medium mb-6 max-w-md mx-auto">
               Create alert rules to get notified when properties match your
               criteria or when contacts show interest.
             </p>

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function SettingsPage() {
   return (
-    <div className="h-full">
+    <div className="h-full p-8">
       <PageHeader
         title="Settings"
         description="Manage your account and application preferences"
@@ -89,17 +89,17 @@ export default function SettingsPage() {
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-medium text-foreground">Email Notifications</p>
-                <p className="text-sm text-foreground-secondary">
+                <p className="font-medium text-primary">Email Notifications</p>
+                <p className="text-sm text-neutral-medium">
                   Receive alerts via email
                 </p>
               </div>
-              <input type="checkbox" className="toggle" defaultChecked />
+              <input type="checkbox" className="h-5 w-5 rounded-full" defaultChecked />
             </div>
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-medium text-foreground">Alert Frequency</p>
-                <p className="text-sm text-foreground-secondary">
+                <p className="font-medium text-primary">Alert Frequency</p>
+                <p className="text-sm text-neutral-medium">
                   How often to receive alert summaries
                 </p>
               </div>
