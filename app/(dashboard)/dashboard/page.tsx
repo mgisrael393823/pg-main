@@ -18,7 +18,7 @@ export default async function DashboardPage() {
   } = await supabase.auth.getUser()
 
   return (
-    <div className="h-full p-8">
+    <div className="h-full p-6">
       <PageHeader
         title="Dashboard"
         description="Welcome back! Here's an overview of your real estate prospecting activity."

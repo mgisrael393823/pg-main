@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { 
   Home, 
@@ -19,14 +18,29 @@ import { createClientSupabase } from '@/utils/supabase-client'
 import { useToast } from '@/components/providers/toast-provider'
 import { useSidebar } from '@/components/providers/sidebar-provider'
 
-const navItems = [
-  { href: '/dashboard', label: 'Dashboard', icon: Home },
-  { href: '/contacts', label: 'Contacts', icon: Users },
-  { href: '/properties', label: 'Properties', icon: Building2 },
-  { href: '/alerts', label: 'Alerts', icon: Bell },
-  { href: '/analytics', label: 'Analytics', icon: BarChart3 },
-  { href: '/upload', label: 'Import Data', icon: Upload },
-  { href: '/settings', label: 'Settings', icon: Settings },
+const navSections = [
+  {
+    label: 'Overview',
+    items: [
+      { href: '/dashboard', label: 'Dashboard', icon: Home },
+      { href: '/analytics', label: 'Analytics', icon: BarChart3 },
+    ]
+  },
+  {
+    label: 'CRM',
+    items: [
+      { href: '/contacts', label: 'Contacts', icon: Users },
+      { href: '/properties', label: 'Properties', icon: Building2 },
+      { href: '/alerts', label: 'Alerts', icon: Bell },
+    ]
+  },
+  {
+    label: 'Tools',
+    items: [
+      { href: '/upload', label: 'Import Data', icon: Upload },
+      { href: '/settings', label: 'Settings', icon: Settings },
+    ]
+  }
 ]
 
 export function DashboardNav() {
@@ -61,51 +75,53 @@ export function DashboardNav() {
   return (
     <div className="h-full flex flex-col">
       {/* Logo/Brand */}
-      <div className="h-16 flex items-center px-6 flex-shrink-0">
+      <div className="h-20 px-6 flex-shrink-0 border-b border-accent-primary/20 flex items-center">
         <Link href="/dashboard" className="block">
-          {/* Logo placeholder - replace src with your actual logo file */}
-          <Image
-            src="/images/logo.png"
-            alt="PorterGoldberg Logo"
-            width={180}
-            height={40}
-            className="h-10 w-auto"
-            priority
-          />
+          <h1 className="text-xl font-semibold text-secondary">PorterGoldberg</h1>
+          <p className="text-sm text-secondary/60">Internal Dashboard</p>
         </Link>
       </div>
 
       {/* Navigation - Scrollable if needed */}
-      <nav className="flex-1 overflow-y-auto px-3 py-4">
-        <ul className="space-y-1">
-          {navItems.map((item) => {
-            const isActive = pathname === item.href
-            const Icon = item.icon
+      <nav className="flex-1 overflow-y-auto p-6">
+        <div className="space-y-6">
+          {navSections.map((section, sectionIndex) => (
+            <div key={section.label}>
+              <h3 className="text-xs font-semibold text-secondary/50 uppercase tracking-wider mb-3">
+                {section.label}
+              </h3>
+              <ul className="space-y-1">
+                {section.items.map((item) => {
+                  const isActive = pathname === item.href
+                  const Icon = item.icon
 
-            return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={closeSidebar}
-                  className={clsx(
-                    'flex items-center gap-3 px-3 py-3 sm:py-2.5 rounded-md transition-all duration-150 text-sm min-h-[44px] sm:min-h-0',
-                    isActive
-                      ? 'bg-accent-primary text-secondary font-medium'
-                      : 'text-secondary/70 hover:bg-accent-primary/10 hover:text-secondary'
-                  )}
-                >
-                  <Icon className="h-5 w-5 flex-shrink-0" />
-                  <span>{item.label}</span>
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={closeSidebar}
+                        className={clsx(
+                          'flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-150 text-sm',
+                          isActive
+                            ? 'bg-accent-primary text-secondary font-medium'
+                            : 'text-secondary/80 hover:bg-accent-primary/20 hover:text-secondary'
+                        )}
+                      >
+                        <Icon className="h-5 w-5 flex-shrink-0" />
+                        <span>{item.label}</span>
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
       </nav>
 
       {/* User section - Fixed at bottom */}
       <div className="flex-shrink-0 border-t border-accent-primary/20">
-        <div className="p-4">
+        <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="h-9 w-9 rounded-full bg-accent-primary flex items-center justify-center">
@@ -118,10 +134,10 @@ export function DashboardNav() {
             </div>
             <button
               onClick={handleSignOut}
-              className="p-3 sm:p-2 text-secondary/50 hover:text-secondary hover:bg-accent-primary/20 rounded-md transition-colors min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 flex items-center justify-center"
+              className="p-2 text-secondary/60 hover:text-secondary hover:bg-accent-primary/20 rounded-md transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
               aria-label="Sign out"
             >
-              <LogOut className="h-5 w-5 sm:h-4 sm:w-4" />
+              <LogOut className="h-5 w-5" />
             </button>
           </div>
         </div>

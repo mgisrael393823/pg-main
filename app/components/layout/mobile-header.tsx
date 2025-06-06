@@ -24,15 +24,17 @@ export function MobileHeader() {
             )}
           </button>
           <Link href="/dashboard" className="block">
-            {/* Logo placeholder - replace src with your actual logo file */}
-            <Image
-              src="/images/logo.png"
-              alt="PorterGoldberg Logo"
-              width={140}
-              height={32}
-              className="h-8 w-auto"
-              priority
-            />
+            <div className="relative h-8 w-auto">
+              <Image
+                src="/images/pglogonew.png"
+                alt="PorterGoldberg"
+                width={120}
+                height={32}
+                className="h-full w-auto object-contain"
+                priority
+                unoptimized
+              />
+            </div>
           </Link>
         </div>
       </div>

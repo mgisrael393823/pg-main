@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function UploadPage() {
   return (
-    <div className="h-full p-8">
+    <div className="h-full p-6">
       <PageHeader
         title="Import Data"
         description="Import contacts from HubSpot or properties from PropStream"

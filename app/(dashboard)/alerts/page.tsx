@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function AlertsPage() {
   return (
-    <div className="h-full p-8">
+    <div className="h-full p-6">
       <PageHeader
         title="Alerts"
         description="Configure intelligent alerts for property matches"

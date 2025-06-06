@@ -23,7 +23,7 @@ export default async function PropertiesPage() {
   const hasProperties = (count || 0) > 0
 
   return (
-    <div className="h-full p-8">
+    <div className="h-full p-6">
       <PageHeader
         title="Properties"
         description="Manage off-market properties from PropStream"

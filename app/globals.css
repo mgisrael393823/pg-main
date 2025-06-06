@@ -30,33 +30,33 @@
     @apply bg-secondary text-primary;
   }
 
-  /* Responsive Typography Scale */
+  /* Typography Scale */
   h1 {
-    @apply text-4xl font-semibold;
+    @apply text-[32px] leading-tight font-semibold;
   }
   
   h2 {
-    @apply text-3xl font-semibold;
+    @apply text-[24px] leading-tight font-semibold;
   }
   
   h3 {
-    @apply text-2xl font-medium;
+    @apply text-[20px] leading-tight font-medium;
   }
   
   h4 {
-    @apply text-xl font-medium;
+    @apply text-[18px] leading-tight font-medium;
   }
   
   h5 {
-    @apply text-lg font-medium;
+    @apply text-[16px] leading-tight font-medium;
   }
   
   p {
-    @apply text-base;
+    @apply text-[16px] leading-relaxed;
   }
   
   small {
-    @apply text-sm;
+    @apply text-[14px] leading-normal;
   }
 }
 

@@ -38,7 +38,7 @@ export default function AnalyticsPage() {
   ]
 
   return (
-    <div className="h-full p-8">
+    <div className="h-full p-6">
       <PageHeader
         title="Analytics"
         description="Track your prospecting performance and ROI"

@@ -27,7 +27,7 @@ export default async function ContactsPage() {
 
   const hasHubSpotConnected = !!integration
   return (
-    <div className="h-full p-8">
+    <div className="h-full p-6">
       <PageHeader
         title="Contacts"
         description="Manage and sync your HubSpot contacts"
