@@ -15,7 +15,7 @@ export default function RegisterPage() {
         {/* Logo */}
         <div className="flex justify-center">
           <Image
-            src="/images/pgreg.png"
+            src="/images/portergoldberg.png"
             alt="PorterGoldberg"
             width={400}
             height={120}
