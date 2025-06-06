@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { RegisterForm } from '@/components/forms/register-form'
 
 export const metadata: Metadata = {
@@ -10,25 +11,17 @@ export const metadata: Metadata = {
 export default function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-secondary p-4">
-      <div className="w-full max-w-md space-y-8">
+      <div className="w-full max-w-md space-y-4">
         {/* Logo */}
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-primary mb-2">
-            PorterGoldberg
-          </h2>
-          <p className="text-sm text-accent-secondary uppercase tracking-wider">
-            Real Estate Platform
-          </p>
-        </div>
-
-        {/* Welcome message */}
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-primary">
-            Get started today
-          </h1>
-          <p className="mt-2 text-lg text-neutral-medium">
-            Create your account in less than a minute
-          </p>
+        <div className="flex justify-center">
+          <Image
+            src="/images/pgreg.png"
+            alt="PorterGoldberg"
+            width={400}
+            height={120}
+            className="h-32 w-auto"
+            priority
+          />
         </div>
 
         {/* Register form */}
