@@ -1,6 +1,8 @@
 'use client'
 
 import { Menu, X } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 import { useSidebar } from '@/components/providers/sidebar-provider'
 
 export function MobileHeader() {
@@ -21,9 +23,17 @@ export function MobileHeader() {
               <Menu className="h-6 w-6" />
             )}
           </button>
-          <div>
-            <h2 className="text-lg font-semibold text-secondary">PorterGoldberg</h2>
-          </div>
+          <Link href="/dashboard" className="block">
+            {/* Logo placeholder - replace src with your actual logo file */}
+            <Image
+              src="/images/logo.png"
+              alt="PorterGoldberg Logo"
+              width={140}
+              height={32}
+              className="h-8 w-auto"
+              priority
+            />
+          </Link>
         </div>
       </div>
     </div>

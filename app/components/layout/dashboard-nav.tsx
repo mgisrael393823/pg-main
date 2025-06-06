@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { 
   Home, 
@@ -61,10 +62,17 @@ export function DashboardNav() {
     <div className="h-full flex flex-col">
       {/* Logo/Brand */}
       <div className="h-16 flex items-center px-6 flex-shrink-0">
-        <div>
-          <h2 className="text-xl font-semibold text-secondary">PorterGoldberg</h2>
-          <p className="text-xs text-accent-secondary uppercase tracking-wider">Real Estate Platform</p>
-        </div>
+        <Link href="/dashboard" className="block">
+          {/* Logo placeholder - replace src with your actual logo file */}
+          <Image
+            src="/images/logo.png"
+            alt="PorterGoldberg Logo"
+            width={180}
+            height={40}
+            className="h-10 w-auto"
+            priority
+          />
+        </Link>
       </div>
 
       {/* Navigation - Scrollable if needed */}

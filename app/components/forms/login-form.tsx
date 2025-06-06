@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { createClientSupabase } from '@/utils/supabase-client'
 import { useToast } from '@/components/providers/toast-provider'
 import { Button } from '@/components/ui/button'
@@ -90,21 +91,33 @@ export function LoginForm() {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-4">
         <div>
-          <Label htmlFor="email">Email address</Label>
+          <Label htmlFor="email" className="text-primary font-medium">
+            Email address
+          </Label>
           <Input
             id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            placeholder="Enter your email"
-            className="mt-1"
+            placeholder="name@company.com"
+            className="mt-2 bg-white border-neutral-medium/20 focus:border-accent-primary"
           />
         </div>
 
         <div>
-          <Label htmlFor="password">Password</Label>
-          <div className="relative mt-1">
+          <div className="flex items-center justify-between">
+            <Label htmlFor="password" className="text-primary font-medium">
+              Password
+            </Label>
+            <Link
+              href="/forgot-password"
+              className="text-sm text-accent-primary hover:text-accent-primary/80 transition-colors"
+            >
+              Forgot password?
+            </Link>
+          </div>
+          <div className="relative mt-2">
             <Input
               id="password"
               type={showPassword ? 'text' : 'password'}
@@ -112,16 +125,17 @@ export function LoginForm() {
               onChange={(e) => setPassword(e.target.value)}
               required
               placeholder="Enter your password"
+              className="bg-white border-neutral-medium/20 focus:border-accent-primary pr-10"
             />
             <button
               type="button"
-              className="absolute inset-y-0 right-0 flex items-center pr-3"
+              className="absolute inset-y-0 right-0 flex items-center pr-3 text-neutral-medium hover:text-primary transition-colors"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
-                <EyeOffIcon className="h-4 w-4 text-foreground-muted" />
+                <EyeOffIcon className="h-5 w-5" />
               ) : (
-                <EyeIcon className="h-4 w-4 text-foreground-muted" />
+                <EyeIcon className="h-5 w-5" />
               )}
             </button>
           </div>
@@ -131,18 +145,20 @@ export function LoginForm() {
       <div className="space-y-4">
         <Button
           type="submit"
-          className="w-full"
+          className="w-full bg-accent-primary hover:bg-accent-primary/90 text-white font-medium py-3"
+          size="lg"
           disabled={isLoading}
+          loading={isLoading}
         >
           {isLoading ? 'Signing in...' : 'Sign in'}
         </Button>
 
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-border" />
+            <div className="w-full border-t border-neutral-medium/20" />
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="bg-background px-2 text-foreground-muted">
+            <span className="bg-secondary px-2 text-neutral-medium">
               Or continue with
             </span>
           </div>
@@ -151,11 +167,12 @@ export function LoginForm() {
         <Button
           type="button"
           variant="outline"
-          className="w-full"
+          className="w-full border-neutral-medium/20 hover:bg-accent-tertiary/10 font-medium py-3"
+          size="lg"
           onClick={handleGoogleSignIn}
           disabled={isLoading}
         >
-          <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
+          <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
             <path
               d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
               fill="#4285F4"
