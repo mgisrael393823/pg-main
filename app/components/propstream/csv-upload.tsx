@@ -40,7 +40,7 @@ export function PropStreamCSVUpload() {
   const router = useRouter()
   const { addToast } = useToast()
 
-  const handleFileSelect = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
 
