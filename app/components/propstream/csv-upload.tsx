@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
+import Papa from 'papaparse'
 import { useRouter } from 'next/navigation'
 import { Upload, FileSpreadsheet, X, AlertCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -22,6 +23,7 @@ interface UploadState {
     successful: number
     failed: number
   } | null
+  preview: string[][] | null
 }
 
 export function PropStreamCSVUpload() {
@@ -32,6 +34,7 @@ export function PropStreamCSVUpload() {
     status: 'idle',
     error: null,
     results: null,
+    preview: null,
   })
 
   const router = useRouter()
@@ -59,12 +62,18 @@ export function PropStreamCSVUpload() {
       })
       return
     }
+    // Parse first 5 rows for preview
+    const text = await file.text()
+    const previewRows = Papa.parse<string[]>(text, {
+      preview: 5,
+    }).data as string[][]
 
     setState(prev => ({
       ...prev,
       file,
       error: null,
       status: 'idle',
+      preview: previewRows,
     }))
   }, [addToast])
 
@@ -217,6 +226,24 @@ export function PropStreamCSVUpload() {
                 </Button>
               )}
             </div>
+
+            {state.preview && (
+              <div className="overflow-auto border border-border rounded-lg text-sm">
+                <table className="min-w-full text-left">
+                  <tbody>
+                    {state.preview.map((row, i) => (
+                      <tr key={i} className="border-b last:border-b-0">
+                        {row.map((cell, j) => (
+                          <td key={j} className="px-2 py-1 whitespace-nowrap">
+                            {cell}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
 
             {/* Upload status */}
             {state.status !== 'idle' && (

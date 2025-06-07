@@ -27,7 +27,7 @@ export function HubSpotSyncButton() {
   const { data: syncStatus } = useQuery<SyncStatus>({
     queryKey: ['hubspot-sync-status'],
     queryFn: async () => {
-      const response = await fetch('/api/integrations/hubspot/sync')
+      const response = await fetch('/api/contacts/sync')
       if (!response.ok) throw new Error('Failed to fetch sync status')
       return response.json()
     },
@@ -37,7 +37,7 @@ export function HubSpotSyncButton() {
   // Sync mutation
   const syncMutation = useMutation({
     mutationFn: async () => {
-      const response = await fetch('/api/integrations/hubspot/sync', {
+      const response = await fetch('/api/contacts/sync', {
         method: 'POST',
       })
       

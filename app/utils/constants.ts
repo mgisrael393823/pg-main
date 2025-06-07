@@ -176,7 +176,7 @@ export const PAGINATION = {
 
 // File upload
 export const FILE_UPLOAD = {
-  MAX_SIZE_MB: 50,
+  MAX_SIZE_MB: 10,
   ALLOWED_TYPES: ['text/csv', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'],
   CHUNK_SIZE: 1000, // Number of rows to process at once
 } as const
