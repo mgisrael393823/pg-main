@@ -169,6 +169,7 @@ export function PropStreamCSVUpload() {
       status: 'idle',
       error: null,
       results: null,
+      preview: null,
     })
   }
 
