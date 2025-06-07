@@ -1,8 +1,27 @@
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  const clientId = process.env.HUBSPOT_CLIENT_ID!
-  const redirectUri = process.env.HUBSPOT_REDIRECT_URI!
+  const clientId = process.env.HUBSPOT_CLIENT_ID
+  const redirectUri = process.env.HUBSPOT_REDIRECT_URI
+  
+  // Debug logging for production
+  console.log('HubSpot OAuth Debug:', {
+    clientId: clientId ? 'Set' : 'Missing',
+    redirectUri: redirectUri ? 'Set' : 'Missing',
+    nodeEnv: process.env.NODE_ENV
+  })
+  
+  if (!clientId || !redirectUri) {
+    return NextResponse.json(
+      { 
+        error: 'Missing configuration',
+        clientId: clientId ? 'Set' : 'Missing',
+        redirectUri: redirectUri ? 'Set' : 'Missing'
+      },
+      { status: 500 }
+    )
+  }
+  
   const scopes = [
     "crm.export",
     "crm.import",
